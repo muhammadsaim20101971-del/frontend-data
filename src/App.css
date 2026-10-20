@@ -1,143 +1,447 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --primary: #4f6df5;
+    --primary-dark: #3855df;
+    --navy: #10182b;
+    --text: #19243a;
+    --muted: #77839a;
+    --border: #e5eaf3;
+    --background: #f4f7fc;
+    --danger: #e5484d;
+    --success: #159b68;
+    --white: #ffffff;
+    --shadow: 0 8px 28px rgba(25, 36, 58, 0.055);
+}
+
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f3f6fb;
-    color: #1e293b;
+html {
+    scroll-behavior: smooth;
 }
+
+body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Header */
 
 .app {
     min-height: 100vh;
 }
 
 .header {
-    background: #0b1120;
+    position: relative;
+    overflow: hidden;
+    padding: 38px 8% 42px;
     color: white;
-    text-align: center;
-    padding: 45px 20px;
+    background:
+        radial-gradient(ellipse at 85% 0%, rgba(79, 109, 245, 0.32), transparent 45%),
+        var(--navy);
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    right: 8%;
+    top: -155px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    box-shadow: 0 0 0 35px rgba(255, 255, 255, 0.025),
+        0 0 0 70px rgba(255, 255, 255, 0.02);
+    pointer-events: none;
 }
 
 .header h1 {
-    color: #4da3ff;
-    font-size: 32px;
-    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+    margin: 0 0 10px;
+    font-size: clamp(27px, 3vw, 36px);
+    font-weight: 800;
+    letter-spacing: -1.2px;
 }
 
 .header p {
-    color: #cbd5e1;
-    font-size: 15px;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    color: #b6c3dc;
+    font-size: 14px;
+    line-height: 1.8;
 }
 
+/* Main content */
+
 .container {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 22px;
+    width: min(1180px, 84%);
+    margin: 0 auto;
+    padding: 38px 0 70px;
 }
 
 .section-heading {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 25px;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 24px;
 }
 
 .section-heading h2 {
-    font-size: 24px;
+    margin: 0;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
 }
 
 .section-heading span {
-    background: #dbeafe;
-    color: #1d4ed8;
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 14px;
+    border: 1px solid #dfe6ff;
+    border-radius: 30px;
+    background: #eaf0ff;
+    color: var(--primary-dark);
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
 }
+
+/* Add student toolbar */
+
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0 25px;
+}
+
+.add-button,
+.save-button,
+.edit-button,
+.delete-button,
+.cancel-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 40px;
+    padding: 10px 16px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.add-button,
+.edit-button {
+    color: white;
+    background: var(--primary);
+    box-shadow: 0 3px 8px rgba(79, 109, 245, 0.15);
+}
+
+.add-button:hover,
+.edit-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(79, 109, 245, 0.2);
+}
+
+.delete-button {
+    color: #c9383f;
+    border-color: #f5d7d9;
+    background: #fff6f6;
+}
+
+.delete-button:hover {
+    color: white;
+    border-color: var(--danger);
+    background: var(--danger);
+}
+
+.save-button {
+    color: white;
+    background: var(--success);
+}
+
+.save-button:hover {
+    background: #118258;
+}
+
+.cancel-button {
+    color: #47536a;
+    border-color: var(--border);
+    background: white;
+}
+
+.cancel-button:hover {
+    background: #f1f4f9;
+}
+
+/* Add/Edit form */
+
+.student-form-panel {
+    margin: 0 0 30px;
+    padding: 27px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    animation: slide-in 0.22s ease;
+}
+
+.student-form-panel h2 {
+    margin: 0 0 23px;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+}
+
+.student-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 21px;
+}
+
+.student-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    color: #34415a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.student-form input {
+    width: 100%;
+    min-height: 45px;
+    padding: 12px 14px;
+    border: 1px solid #dce3ef;
+    border-radius: 9px;
+    outline: none;
+    background: #fbfcff;
+    color: var(--text);
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.student-form input:focus {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(79, 109, 245, 0.12);
+}
+
+.form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 2px;
+}
+
+/* Student cards */
 
 .student-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 22px;
 }
 
 .student-card {
-    background: white;
-    padding: 25px;
-    border-radius: 14px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 5px 18px rgba(15, 23, 42, 0.05);
-    transition: transform 0.2s, box-shadow 0.2s;
-    overflow-wrap: anywhere;
+    position: relative;
+    min-width: 0;
+    padding: 23px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background: var(--white);
+    box-shadow: 0 4px 16px rgba(25, 36, 58, 0.035);
+    transition: transform 0.22s ease, box-shadow 0.22s ease,
+        border-color 0.22s ease;
 }
 
 .student-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+    border-color: #d3dcff;
+    box-shadow: 0 12px 30px rgba(25, 36, 58, 0.09);
 }
 
 .student-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: #dbeafe;
-    color: #2563eb;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 18px;
+    width: 49px;
+    height: 49px;
+    margin-bottom: 19px;
+    border: 1px solid #dce5ff;
+    border-radius: 13px;
+    background: linear-gradient(145deg, #edf2ff, #dce6ff);
+    color: var(--primary-dark);
+    font-size: 20px;
+    font-weight: 800;
 }
 
 .student-card h3 {
-    font-size: 20px;
-    margin-bottom: 16px;
-    color: #0f172a;
+    margin: 0 0 17px;
+    overflow-wrap: anywhere;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
 }
 
 .student-card p {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #475569;
+    margin: 0 0 12px;
+    color: #64718a;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.student-card p strong {
+    color: #34415a;
+    font-weight: 700;
 }
 
 .student-card .email {
-    color: #2563eb;
-    word-break: break-word;
+    margin-bottom: 0;
+    color: var(--primary-dark);
 }
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 23px;
+    padding-top: 17px;
+    border-top: 1px solid #edf0f6;
+}
+
+.card-actions button {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 8px;
+}
+
+/* Messages and errors */
 
 .message {
+    margin: 0 0 22px;
+    padding: 17px 19px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
     background: white;
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
+    color: #5c6980;
+    line-height: 1.7;
 }
 
-.error {
-    color: #b91c1c;
+.message.error {
+    border-color: #f5d0d2;
+    background: #fff3f3;
+    color: #b4232b;
 }
 
-@media (max-width: 600px) {
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(7px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tablet */
+
+@media (max-width: 950px) {
+    .container {
+        width: 88%;
+    }
+
+    .student-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 17px;
+    }
+
     .header {
-        padding: 35px 16px;
+        padding-right: 6%;
+        padding-left: 6%;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 580px) {
+    .header {
+        padding: 30px 6% 34px;
     }
 
     .header h1 {
-        font-size: 26px;
+        font-size: 27px;
     }
 
     .container {
-        margin: 28px auto;
-        padding: 0 16px;
+        width: 90%;
+        padding-top: 28px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        margin-bottom: 20px;
     }
 
     .section-heading h2 {
-        font-size: 21px;
+        font-size: 20px;
+    }
+
+    .student-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .student-card {
+        padding: 21px;
+    }
+
+    .student-form-panel {
+        padding: 20px;
+    }
+
+    .student-form {
+        grid-template-columns: 1fr;
+        gap: 17px;
+    }
+
+    .form-actions {
+        grid-column: auto;
+    }
+
+    .toolbar .add-button {
+        width: 100%;
     }
 }
