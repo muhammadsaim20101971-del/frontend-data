@@ -2,8 +2,13 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const BASE_URL = "http://localhost:5000";
+
+const BASE_URL = (
+    process.env.REACT_APP_API_URL || "http://localhost:5000"
+).replace(/\/$/, "");
+
 const STUDENTS_URL = `${BASE_URL}/students`;
+
 
 const emptyForm = {
     name: "",
